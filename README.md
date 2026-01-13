@@ -1,23 +1,23 @@
-# VulnerabilityManagement
-Vulnerability Management project in which I used the Tenable Vulnerability Management platform to scan Windows11 VM on an Azure Network, applied pre-built remediation scripts in Powershell, and developed/applied additional scripts to remediate remaining vulnerabilities
+# STIG Implementation
+Security Technical Implementation Guides project in which I used the Tenable Vulnerability Management platform to scan Windows11 VM on an Azure Network, identified STIG audit failures, developed Powershell scripts to implement STIGS, and applied STIG scripts in Powershell.
 
 ---
 
 
-<img width="1000" alt="image" src="https://github.com/user-attachments/assets/cfc5dbcf-3fcb-4a71-9c13-2a49f8bab3e6">
+<img width="1000" alt="image" src="https://github.com/SantiagoX86/STIG_Implementation/blob/main/1684777317266.png">
 
 # Technology Utilized
 - Tenable (enterprise vulnerability management platform)
 - Azure Virtual Machines (Nessus scan engine + scan targets)
-- PowerShell & BASH (remediation scripts)
-- ChatGPT (additional remediation script development)
+- PowerShell & BASH (STIG scripts)
+- ChatGPT (STIG script development)
 
 ---
 
 
 # Table of Contents
 
-- [VulnerabilityManagement](#vulnerabilitymanagement)
+- [STIG Implementation](#stig-implementation)
 - [Technology Utilized](#technology-utilized)
 - [Table of Contents](#table-of-contents)
     - [Initial Vulnerability Scan of Azure VM LogNPacific3286](#initial-vulnerability-scan-of-azure-vm-lognpacific3286)
