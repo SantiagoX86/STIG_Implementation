@@ -20,42 +20,39 @@ Security Technical Implementation Guides project in which I used the Tenable Vul
 - [STIG Implementation](#stig-implementation)
 - [Technology Utilized](#technology-utilized)
 - [Table of Contents](#table-of-contents)
-    - [Initial Vulnerability Scan of Azure VM LogNPacific3286](#initial-vulnerability-scan-of-azure-vm-lognpacific3286)
+    - [Initial STIG Audit Scan of Azure VM LogNPacific3446](#initial-stig-audit-scan-of-azure-vm-lognpacific3446)
     - [Traige and Prioritization](#traige-and-prioritization)
-    - [Application of Pre-built Remediation Scripts](#application-of-pre-built-remediation-scripts)
-    - [Secondary Scan Following Application of Remediation Scripts](#secondary-scan-following-application-of-remediation-scripts)
-    - [Development of Additional Remediation Scripts](#development-of-additional-remediation-scripts)
+    - [Development of Remediation Scripts](#development-of-remediation-scripts)
 - [Remediation Development Documentation](#remediation-development-documentation)
   - [1. Purpose and Scope](#1-purpose-and-scope)
   - [2. Methodology Overview](#2-methodology-overview)
-  - [3. Control Alignment Summary](#3-control-alignment-summary)
-  - [4. Documented Remediation Cases](#4-documented-remediation-cases)
-  - [4.1 WinVerifyTrust Signature Validation](#41-winverifytrust-signature-validation)
+  - [3. Documented Remediation Cases](#3-documented-remediation-cases)
+  - [3.1 – Structured Exception Handling Overwrite Protection (SEHOP) must be enabled](#31--structured-exception-handling-overwrite-protection-sehop-must-be-enabled)
     - [Summary](#summary)
     - [Remediation Approach](#remediation-approach)
     - [Testing and Iteration](#testing-and-iteration)
     - [Outcome](#outcome)
     - [Final Status](#final-status)
-  - [4.2 Security Updates – Outlook for Windows (April 2024)](#42-security-updates--outlook-for-windows-april-2024)
+  - [3.2 Security Updates – Outlook for Windows (April 2024)](#32-security-updates--outlook-for-windows-april-2024)
     - [Summary](#summary-1)
     - [Remediation Approach](#remediation-approach-1)
     - [Testing and Iteration](#testing-and-iteration-1)
     - [Verification](#verification)
     - [Final Status](#final-status-1)
-  - [4.3 Microsoft Teams for Desktop Remote Code Execution](#43-microsoft-teams-for-desktop-remote-code-execution)
+  - [3.3 Microsoft Teams for Desktop Remote Code Execution](#33-microsoft-teams-for-desktop-remote-code-execution)
     - [Summary](#summary-2)
     - [Remediation Approach](#remediation-approach-2)
     - [Challenges Encountered](#challenges-encountered)
     - [Testing Results](#testing-results)
     - [Conclusion](#conclusion)
     - [Final Status](#final-status-2)
-  - [4.4 SSL Certificate Trust Issues](#44-ssl-certificate-trust-issues)
+  - [3.4 SSL Certificate Trust Issues](#34-ssl-certificate-trust-issues)
     - [Summary](#summary-3)
     - [Remediation Approach](#remediation-approach-3)
     - [Iteration and Analysis](#iteration-and-analysis)
     - [Limitations Identified](#limitations-identified)
     - [Final Status](#final-status-3)
-  - [4.5 ICMP Timestamp Request Remote Date Disclosure](#45-icmp-timestamp-request-remote-date-disclosure)
+  - [3.5 ICMP Timestamp Request Remote Date Disclosure](#35-icmp-timestamp-request-remote-date-disclosure)
     - [Summary](#summary-4)
     - [Remediation Approach](#remediation-approach-4)
     - [Testing Results](#testing-results-1)
@@ -67,38 +64,21 @@ Security Technical Implementation Guides project in which I used the Tenable Vul
 
 ---
 
-### Initial Vulnerability Scan of Azure VM LogNPacific3286
+### Initial STIG Audit Scan of Azure VM LogNPacific3446
 
-In this phase the initial scan was conducted and vulnerabilities were identified and prioritized. Existing related remediation scripts were identified for patch application via powershell execution.
+In this phase the initial scan was conducted and STIG failures were identified.
 
 ---
 
 ### Traige and Prioritization
 
-This stage consisted of analyzing vulnerabilities in terms of criticality using Tenable platform, assets affected, and ease of remediation based on existence of remediation script as opposed to those for which a script would need to be developed.
+This stage consisted of analyzing STIG failures to ensure Powershell implementation is feasible and that implementation would not break any necessary functionality such as subsequent Tenable scans, remote access, etc.
 
 ---
 
-### Application of Pre-built Remediation Scripts
+### Development of Remediation Scripts
 
-Role out of applications of the various scripts that had been identified in the previous phase to automate vulnerability remediation in a way that would be easily applicable at scale. Remediation application will vary by vulnerability based on information gathered in Triage and after a consultation with stakeholders. Significant remediation script application would ideally be conducted in stages as follows:
-- Roleback developed and put in place
-- Sandbox stage role out in a synthetic environment
-- Small scale role out on minimal number of least critical assets
-- Small scale role out on minimal number of assets of all criticality levels
-- Full scale role out on all vulnerable assets
-
----
-
-### Secondary Scan Following Application of Remediation Scripts
-
-Following application of existing remediation scripts a scan was conducted to confirm remediation of vulnerabilities. Identification of remaining vulnerabilities was also conducted during this stage for development of remediation automation scripts.
-
----
-
-### Development of Additional Remediation Scripts
-
-Through the use of AI, additional remediation scripts were developed including reversal scripts for role back during testing in case remediation scripts have unintended consequnces affecting dependent network assets. Iterative process was used in development in development in which language processing engines were prompted for scripts and scripts were tested in a sandbox environment for execution success and results were observed, documented, and actioned until intended results were achieved. Same process was followed for reversal scripts.
+Through the use of AI, remediation scripts were developed. Iterative process was used in development in which language processing engines were prompted for scripts and scripts were manually analyzed, tested in a sandbox environment for execution success, and results were observed, documented, and actioned until intended results were achieved.
 
 # Remediation Development Documentation  
 **Enterprise Vulnerability Remediation Lifecycle**
@@ -107,12 +87,7 @@ Through the use of AI, additional remediation scripts were developed including r
 
 ## 1. Purpose and Scope
 
-This document provides formal documentation of the vulnerability remediation development lifecycle for identified findings on Microsoft Azure Windows 11 virtual machines. It details the methodology used to design, test, validate, and disposition remediations in alignment with recognized security frameworks, including:
-
-- **NIST Cybersecurity Framework (CSF)**
-- **NIST SP 800-53 Rev. 5**
-- **CIS Critical Security Controls**
-- **ISO/IEC 27001:2022**
+This document provides formal documentation of the STIG implementation development lifecycle for identified findings on Microsoft Azure Windows 11 virtual machines. It details the methodology used to design, test, validate, and disposition remediations.
 
 The documentation includes evidence of iterative testing, validation through subsequent vulnerability scans, and final remediation outcomes or risk disposition decisions.
 
@@ -123,72 +98,55 @@ The documentation includes evidence of iterative testing, validation through sub
 The remediation lifecycle followed a standardized enterprise approach:
 
 1. **Identification**  
-   Vulnerabilities were identified through authenticated Tenable vulnerability scans.
+   STIG failures were identified through authenticated Tenable STIG audit scans.
 
 2. **Analysis**  
    Each finding was reviewed to determine applicability, technical impact, and remediation feasibility.
 
 3. **Remediation Development**  
-   For each vulnerability, a standardized three-script model was developed:
-   - **Backup Script** – Captures system state to enable rollback
-   - **Remediation Script** – Implements corrective controls
-   - **Rollback Script** – Restores the system to its pre-remediation state if required
+   For each vulnerability, an implementation script was developed using AI prompting and manual evaluation.
 
 4. **Testing**  
    Scripts were executed in sandbox environments to validate behavior and error handling.
 
 5. **Verification**  
-   Tenable scans were rerun to confirm remediation effectiveness.
+   Tenable scans were rerun to confirm STIG implementation effectiveness.
 
 6. **Disposition**  
-   Vulnerabilities were either:
-   - Successfully remediated
+   STIG were either:
+   - Successfully implemented leading to 
    - Determined not applicable
    - Determined not fully remediable via automation
    - Escalated for formal risk acceptance
 
 ---
 
-## 3. Control Alignment Summary
-
-| Framework | Alignment |
-|---------|----------|
-| **NIST CSF** | PR.IP-1, PR.IP-3, PR.MA-1 |
-| **NIST SP 800-53** | SI-2, CM-3, CM-6, CP-9 |
-| **CIS Controls** | Control 7 (Continuous Vulnerability Management), Control 4 (Secure Configuration) |
-| **ISO/IEC 27001** | Annex A.8.8, A.8.9, A.8.32 |
+## 3. Documented Remediation Cases
 
 ---
 
-## 4. Documented Remediation Cases
-
----
-
-## 4.1 WinVerifyTrust Signature Validation  
-**CVE-2013-3900 | Tenable Plugin ID 166555**
+## 3.1 – Structured Exception Handling Overwrite Protection (SEHOP) must be enabled
+**WN11-00-000150**
 
 ### Summary
-A vulnerability was identified related to improper certificate padding validation in the WinVerifyTrust API.
+A STIG failure was identified in which structured Exception Handling Overwrite Protection(SEHOP) was not enabled and it should be enabled..
 
 ### Remediation Approach
-ChatGPT was prompted to develop three PowerShell scripts (backup, remediation, rollback) to enable the `EnableCertPaddingCheck` registry setting.
+ChatGPT was prompted to develop a STIG implementation script to be used on this VM and scaleable to enterprise environment.
 
 ### Testing and Iteration
-- Initial backup attempts failed due to missing or inaccessible paths.
-- Scripts were rewritten to handle missing path errors gracefully.
-- The final backup script executed successfully but was unable to generate backups, triggering user notification and caution messaging.
+- Initial execution of script returned that SEHOP had been implemented and that audit failure should be remediated
+- Subseqquent scan showed STIG passed audit
 
 ### Outcome
-- The remediation script executed successfully.
-- The registry setting was applied as intended.
-- A subsequent Tenable scan confirmed successful remediation.
+- The execution of script successfully enabled SEHOP
 
 ### Final Status
-**Remediated Successfully**
+**STIG Implemented Successfully**
 
 ---
 
-## 4.2 Security Updates – Outlook for Windows (April 2024)  
+## 3.2 Security Updates – Outlook for Windows (April 2024)  
 **Tenable Plugin ID 193266 | Severity: High**
 
 ### Summary
@@ -211,7 +169,7 @@ Three scripts were developed to detect the Office installation type (Click-to-Ru
 
 ---
 
-## 4.3 Microsoft Teams for Desktop Remote Code Execution  
+## 3.3 Microsoft Teams for Desktop Remote Code Execution  
 **Version < 25122.1415.3698.6812 | Plugin ID 250276 | Severity: High**
 
 ### Summary
@@ -245,7 +203,7 @@ The vulnerability could not be reliably remediated via PowerShell automation due
 
 ---
 
-## 4.4 SSL Certificate Trust Issues  
+## 3.4 SSL Certificate Trust Issues  
 **Tenable Plugin IDs 51192, 57582 | Severity: Medium**
 
 ### Summary
@@ -272,7 +230,7 @@ These prerequisites exist outside the VM and cannot be fully automated.
 
 ---
 
-## 4.5 ICMP Timestamp Request Remote Date Disclosure  
+## 3.5 ICMP Timestamp Request Remote Date Disclosure  
 **Tenable Plugin ID 10114 | Severity: Low**
 
 ### Summary
