@@ -33,11 +33,11 @@ Security Technical Implementation Guides project in which I used the Tenable Vul
     - [Testing and Iteration](#testing-and-iteration)
     - [Outcome](#outcome)
     - [Final Status](#final-status)
-  - [3.2 Security Updates – Outlook for Windows (April 2024)](#32-security-updates--outlook-for-windows-april-2024)
+  - [3.2 – WDigest Authentication must be disabled](#32--wdigest-authentication-must-be-disabled)
     - [Summary](#summary-1)
     - [Remediation Approach](#remediation-approach-1)
     - [Testing and Iteration](#testing-and-iteration-1)
-    - [Verification](#verification)
+    - [Outcome](#outcome-1)
     - [Final Status](#final-status-1)
   - [3.3 Microsoft Teams for Desktop Remote Code Execution](#33-microsoft-teams-for-desktop-remote-code-execution)
     - [Summary](#summary-2)
@@ -146,26 +146,24 @@ ChatGPT was prompted to develop a STIG implementation script to be used on this 
 
 ---
 
-## 3.2 Security Updates – Outlook for Windows (April 2024)  
-**Tenable Plugin ID 193266 | Severity: High**
+## 3.2 – WDigest Authentication must be disabled 
+**WN11-CC-000038**
 
 ### Summary
-A vulnerability related to missing Outlook security updates was detected.
+WDigest authentication stores passwords in memory in clear text for HTTP/S authentication. This is a security risk because an attacker who gains memory access could retrieve user passwords. Disabling WDigest prevents this exposure.
 
 ### Remediation Approach
-Three scripts were developed to detect the Office installation type (Click-to-Run versus MSI) and remediate accordingly.
+ChatGPT was prompted to develop a STIG implementation script to be used on this VM and scaleable to enterprise environment.
 
 ### Testing and Iteration
-- The backup script failed to create backups due to missing artifacts.
-- The remediation script initially failed due to missing Click-to-Run components.
-- The script was rewritten to detect MSI-based installations and residual registry artifacts.
+- Implementation script run resulting in message that STIG had been implemented effectively and that VM should pass audit for this STIG
+- Subsequent Tenable STIG audit scan run to verify implementation
 
-### Verification
-- The script correctly identified that Outlook was not installed.
-- A Tenable scan confirmed the vulnerability was no longer applicable.
+### Outcome
+- WDigest effectively disabled
 
 ### Final Status
-**Not Applicable – Software Not Installed**
+**STIG implemented successfully**
 
 ---
 
