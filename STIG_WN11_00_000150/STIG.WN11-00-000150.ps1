@@ -17,8 +17,8 @@
 .TESTED ON
     Date(s) Tested  : 
     Tested By       : 
-    Systems Tested  : Azure Windows 11 VMs
-    PowerShell Ver. : 5.1+
+    Systems Tested  : 
+    PowerShell Ver. : 
 
 .USAGE
     Run this script with Administrator privileges on the target VM.

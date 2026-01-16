@@ -14,7 +14,17 @@
     Author        : Sean Santiago
     Date Created  : 2026-01-15
     Last Modified : 2026-01-15
-    Tested On     : Windows 11 Pro, Azure VM
+    Github        : https://github.com/SantiagoX86
+    Version       : 1.0
+    CVEs          : N/A
+    Plugin IDs    : N/A
+    STIG-ID       : WN11-CC-000038
+
+.TESTED ON
+    Date(s) Tested  : 
+    Tested By       : 
+    Systems Tested  : 
+    PowerShell Ver. : 
 
 .LINK
     STIG Reference: https://public.cyber.mil/stigs/
