@@ -57,15 +57,14 @@ Security Technical Implementation Guides project in which I used the Tenable Vul
     - [Testing and Iteration](#testing-and-iteration-4)
     - [Outcome](#outcome-4)
     - [Final Status](#final-status-4)
-  - [3.6 – Next STIG](#36--next-stig)
+  - [3.6 – Microsoft consumer experiences must be turned off](#36--microsoft-consumer-experiences-must-be-turned-off)
     - [Summary](#summary-5)
     - [Remediation Approach](#remediation-approach-5)
     - [Testing and Iteration](#testing-and-iteration-5)
     - [Outcome](#outcome-5)
     - [Final Status](#final-status-5)
-  - [5. Risk Management and Exception Handling](#5-risk-management-and-exception-handling)
-  - [6. Conclusion](#6-conclusion)
-  - [7. Appendix: Evidence Artifacts](#7-appendix-evidence-artifacts)
+  - [4. Conclusion](#4-conclusion)
+  - [5. Appendix: Evidence Artifacts](#5-appendix-evidence-artifacts)
 
 ---
 
@@ -240,11 +239,11 @@ Maintaining an audit trail of system activity logs can help identify configurati
 
 ---
 
-## 3.6 – Next STIG
-**WN11-CC-ID**
+## 3.6 – Microsoft consumer experiences must be turned off
+**WN11-CC-000197**
 
 ### Summary
-Disabling camera access from the Windows lock screen to prevent use of imaging hardware before user authentication. Allowing camera functionality at the lock screen could enable unauthorized image or video capture without valid credentials, increasing the system’s pre-authentication attack surface. Enforcing this setting ensures hardware resources are only available after sign-in and supports least-privilege and enterprise security compliance requirements.
+Microsoft consumer experiences provides suggestions and notifications to users, which may include the installation of Windows Store apps. Organizations may control the execution of applications through other means such as allowlisting. Turning off Microsoft consumer experiences will help prevent the unwanted installation of suggested applications.
 
 ### Remediation Approach
 - ChatGPT was prompted to develop a STIG implementation script to be used on this VM that is scaleable to enterprise environment.
@@ -255,35 +254,20 @@ Disabling camera access from the Windows lock screen to prevent use of imaging h
 - Subsequent Tenable STIG audit scan run to verify implementation
 
 ### Outcome
-- Camera access while VM in lock-screen state effectively disabled
+- Microsoft consumer experiences effectively disabled
 
 ### Final Status
 **STIG implemented successfully**
 
 ---
 
-## 5. Risk Management and Exception Handling
+## 4. Conclusion
 
-For vulnerabilities determined to be:
-- Not applicable
-- Not fully automatable
-- Platform-constrained
-
-A formal risk exception is recommended in accordance with:
-- ISO/IEC 27001 risk treatment requirements
-- NIST risk management guidance
-
-Exceptions should be reviewed and approved by appropriate management authority.
+This STIG implementation effort demonstrates a structured, repeatable, and auditable approach to STIG audit failure management. Where automation was feasible, STIG failures were successfully remediated and verified. Where technical or platform limitations existed, risks were clearly documented and escalated for appropriate governance decisions.
 
 ---
 
-## 6. Conclusion
-
-This remediation effort demonstrates a structured, repeatable, and auditable approach to vulnerability management. Where automation was feasible, vulnerabilities were successfully remediated and verified. Where technical or platform limitations existed, risks were clearly documented and escalated for appropriate governance decisions.
-
----
-
-## 7. Appendix: Evidence Artifacts
+## 5. Appendix: Evidence Artifacts
 
 - Tenable scan reports (pre- and post-remediation)
 
