@@ -22,11 +22,11 @@ Security Technical Implementation Guides project in which I used the Tenable Vul
 - [Table of Contents](#table-of-contents)
     - [Initial STIG Audit Scan of Azure VM LogNPacific3446](#initial-stig-audit-scan-of-azure-vm-lognpacific3446)
     - [Traige and Prioritization](#traige-and-prioritization)
-    - [Development of Remediation Scripts](#development-of-remediation-scripts)
-- [Remediation Development Documentation](#remediation-development-documentation)
+    - [Development of STIG Implementation Scripts](#development-of-stig-implementation-scripts)
+- [STIG Implementation Development Documentation](#stig-implementation-development-documentation)
   - [1. Purpose and Scope](#1-purpose-and-scope)
   - [2. Methodology Overview](#2-methodology-overview)
-  - [3. Documented Remediation Cases](#3-documented-remediation-cases)
+  - [3. Documented STIG Implementation Cases](#3-documented-stig-implementation-cases)
   - [3.1 – Structured Exception Handling Overwrite Protection (SEHOP) must be enabled](#31--structured-exception-handling-overwrite-protection-sehop-must-be-enabled)
     - [Summary](#summary)
     - [Remediation Approach](#remediation-approach)
@@ -39,25 +39,30 @@ Security Technical Implementation Guides project in which I used the Tenable Vul
     - [Testing and Iteration](#testing-and-iteration-1)
     - [Outcome](#outcome-1)
     - [Final Status](#final-status-1)
-  - [3.3 Microsoft Teams for Desktop Remote Code Execution](#33-microsoft-teams-for-desktop-remote-code-execution)
+  - [3.3 – Camera access from the lock screen must be disabled](#33--camera-access-from-the-lock-screen-must-be-disabled)
     - [Summary](#summary-2)
     - [Remediation Approach](#remediation-approach-2)
-    - [Challenges Encountered](#challenges-encountered)
-    - [Testing Results](#testing-results)
-    - [Conclusion](#conclusion)
+    - [Testing and Iteration](#testing-and-iteration-2)
+    - [Outcome](#outcome-2)
     - [Final Status](#final-status-2)
-  - [3.4 SSL Certificate Trust Issues](#34-ssl-certificate-trust-issues)
+  - [3.4 – Internet connection sharing must be disabled.](#34--internet-connection-sharing-must-be-disabled)
     - [Summary](#summary-3)
     - [Remediation Approach](#remediation-approach-3)
-    - [Iteration and Analysis](#iteration-and-analysis)
-    - [Limitations Identified](#limitations-identified)
+    - [Testing and Iteration](#testing-and-iteration-3)
+    - [Outcome](#outcome-3)
     - [Final Status](#final-status-3)
-  - [3.5 ICMP Timestamp Request Remote Date Disclosure](#35-icmp-timestamp-request-remote-date-disclosure)
+  - [3.5 – Command line data must be included in process creation events](#35--command-line-data-must-be-included-in-process-creation-events)
     - [Summary](#summary-4)
     - [Remediation Approach](#remediation-approach-4)
-    - [Testing Results](#testing-results-1)
-    - [Risk Analysis](#risk-analysis)
+    - [Testing and Iteration](#testing-and-iteration-4)
+    - [Outcome](#outcome-4)
     - [Final Status](#final-status-4)
+  - [3.6 – Next STIG](#36--next-stig)
+    - [Summary](#summary-5)
+    - [Remediation Approach](#remediation-approach-5)
+    - [Testing and Iteration](#testing-and-iteration-5)
+    - [Outcome](#outcome-5)
+    - [Final Status](#final-status-5)
   - [5. Risk Management and Exception Handling](#5-risk-management-and-exception-handling)
   - [6. Conclusion](#6-conclusion)
   - [7. Appendix: Evidence Artifacts](#7-appendix-evidence-artifacts)
@@ -76,35 +81,35 @@ This stage consisted of analyzing STIG failures to ensure Powershell implementat
 
 ---
 
-### Development of Remediation Scripts
+### Development of STIG Implementation Scripts
 
-Through the use of AI, remediation scripts were developed. Iterative process was used in development in which language processing engines were prompted for scripts and scripts were manually analyzed, tested in a sandbox environment for execution success, and results were observed, documented, and actioned until intended results were achieved.
+Through the use of AI, STIG Implementation scripts were developed. Iterative process was used in development in which language processing engines were prompted for scripts and scripts were manually analyzed, tested in a sandbox environment for execution success, and results were observed, documented, and actioned until intended results were achieved.
 
-# Remediation Development Documentation  
-**Enterprise Vulnerability Remediation Lifecycle**
+# STIG Implementation Development Documentation  
+**Enterprise STIG Implementation Lifecycle**
 
 ---
 
 ## 1. Purpose and Scope
 
-This document provides formal documentation of the STIG implementation development lifecycle for identified findings on Microsoft Azure Windows 11 virtual machines. It details the methodology used to design, test, validate, and disposition remediations.
+This document provides formal documentation of the STIG implementation development lifecycle for identified findings on Microsoft Azure Windows 11 virtual machines. It details the methodology used to design, test, validate, and disposition STIG implementations.
 
-The documentation includes evidence of iterative testing, validation through subsequent vulnerability scans, and final remediation outcomes or risk disposition decisions.
+The documentation includes evidence of iterative testing, validation through subsequent vulnerability scans, and final implementaiton outcomes or risk disposition decisions.
 
 ---
 
 ## 2. Methodology Overview
 
-The remediation lifecycle followed a standardized enterprise approach:
+The STIG implementation lifecycle followed a standardized enterprise approach:
 
 1. **Identification**  
    STIG failures were identified through authenticated Tenable STIG audit scans.
 
 2. **Analysis**  
-   Each finding was reviewed to determine applicability, technical impact, and remediation feasibility.
+   Each finding was reviewed to determine applicability, technical impact, and implementation feasibility.
 
-3. **Remediation Development**  
-   For each vulnerability, an implementation script was developed using AI prompting and manual evaluation.
+3. **STIG Implementation Development**  
+   For each STIG, an implementation script was developed using AI prompting and manual evaluation.
 
 4. **Testing**  
    Scripts were executed in sandbox environments to validate behavior and error handling.
@@ -121,7 +126,7 @@ The remediation lifecycle followed a standardized enterprise approach:
 
 ---
 
-## 3. Documented Remediation Cases
+## 3. Documented STIG Implementation Cases
 
 ---
 
@@ -132,7 +137,8 @@ The remediation lifecycle followed a standardized enterprise approach:
 A STIG failure was identified in which structured Exception Handling Overwrite Protection(SEHOP) was not enabled and it should be enabled..
 
 ### Remediation Approach
-ChatGPT was prompted to develop a STIG implementation script to be used on this VM and scaleable to enterprise environment.
+- ChatGPT was prompted to develop a STIG implementation script to be used on this VM that is scaleable to enterprise environment.
+- Script was manually reviewed and run on VM to test effectiveness
 
 ### Testing and Iteration
 - Initial execution of script returned that SEHOP had been implemented and that audit failure should be remediated
@@ -153,7 +159,8 @@ ChatGPT was prompted to develop a STIG implementation script to be used on this 
 WDigest authentication stores passwords in memory in clear text for HTTP/S authentication. This is a security risk because an attacker who gains memory access could retrieve user passwords. Disabling WDigest prevents this exposure.
 
 ### Remediation Approach
-ChatGPT was prompted to develop a STIG implementation script to be used on this VM and scaleable to enterprise environment.
+- ChatGPT was prompted to develop a STIG implementation script to be used on this VM that is scaleable to enterprise environment.
+- Script was manually reviewed and run on VM to test effectiveness
 
 ### Testing and Iteration
 - Implementation script run resulting in message that STIG had been implemented effectively and that VM should pass audit for this STIG
@@ -167,87 +174,91 @@ ChatGPT was prompted to develop a STIG implementation script to be used on this 
 
 ---
 
-## 3.3 Microsoft Teams for Desktop Remote Code Execution  
-**Version < 25122.1415.3698.6812 | Plugin ID 250276 | Severity: High**
+## 3.3 – Camera access from the lock screen must be disabled  
+**WN11-CC-000005**
 
 ### Summary
-A remote code execution vulnerability affecting Microsoft Teams for Desktop was identified.
+Disabling camera access from the Windows lock screen to prevent use of imaging hardware before user authentication. Allowing camera functionality at the lock screen could enable unauthorized image or video capture without valid credentials, increasing the system’s pre-authentication attack surface. Enforcing this setting ensures hardware resources are only available after sign-in and supports least-privilege and enterprise security compliance requirements.
 
 ### Remediation Approach
-Multiple remediation strategies were attempted to:
-- Remove legacy (Classic) Teams components
-- Validate or install New Teams
-- Clear residual caches
-- Enforce machine-wide installation
+- ChatGPT was prompted to develop a STIG implementation script to be used on this VM that is scaleable to enterprise environment.
+- Script was manually reviewed and run on VM to test effectiveness
 
-### Challenges Encountered
-- Architectural differences between Classic Teams (per-user) and New Teams (MSIX-based)
-- Azure VM Microsoft Store and MSIX restrictions
-- Installer failures related to:
-  - Missing prerequisites
-  - User-versus-system installation context
-  - Stub installer behavior
+### Testing and Iteration
+- Implementation script run resulting in message that STIG had been implemented effectively and that VM should pass audit for this STIG
+- Subsequent Tenable STIG audit scan run to verify implementation
 
-### Testing Results
-Despite multiple script iterations and troubleshooting logic:
-- Remediation scripts executed successfully
-- Tenable scans continued to report the vulnerability
-
-### Conclusion
-The vulnerability could not be reliably remediated via PowerShell automation due to platform and installer limitations.
+### Outcome
+- Camera access while VM in lock-screen state effectively disabled
 
 ### Final Status
-**Not Remediable via Automation – Requires Platform or Vendor Resolution**
+**STIG implemented successfully**
 
 ---
 
-## 3.4 SSL Certificate Trust Issues  
-**Tenable Plugin IDs 51192, 57582 | Severity: Medium**
+## 3.4 – Internet connection sharing must be disabled.
+**WN11-CC-000044**
 
 ### Summary
-Tenable identified SSL certificates that were either self-signed or not trusted.
+Internet connection sharing makes it possible for an existing internet connection, such as through wireless, to be shared and used by other systems essentially creating a mobile hotspot. This exposes the system sharing the connection to others with potentially malicious purpose.
 
 ### Remediation Approach
-Initial scripts attempted certificate replacement but were determined to provide superficial scanner remediation without materially improving security posture.
+- ChatGPT was prompted to develop a STIG implementation script to be used on this VM that is scaleable to enterprise environment.
+- Script was manually reviewed and run on VM to test effectiveness
 
-### Iteration and Analysis
-- Legitimate remediation requires CA-issued certificates.
-- Azure Key Vault–based certificate deployment was explored.
-- Azure PowerShell dependencies (NuGet and Az modules) were incorporated into the scripts.
+### Testing and Iteration
+- Implementation script run resulting in message that STIG had been implemented effectively and that VM should pass audit for this STIG
+- Subsequent Tenable STIG audit scan run to verify implementation and found that VM passed this STIG audit item
 
-### Limitations Identified
-Remediation requires:
-- Existing CA-issued certificates
-- Azure Key Vault access
-- Credential configuration
-
-These prerequisites exist outside the VM and cannot be fully automated.
+### Outcome
+- Internet connection sharing disabled
 
 ### Final Status
-**Conditionally Remediable – Requires PKI and Azure Key Vault Integration**
+**STIG implemented successfully**
 
 ---
 
-## 3.5 ICMP Timestamp Request Remote Date Disclosure  
-**Tenable Plugin ID 10114 | Severity: Low**
+## 3.5 – Command line data must be included in process creation events
+**WN11-CC-000066**
 
 ### Summary
-A low-risk reconnaissance vulnerability related to ICMP timestamp responses was identified.
+Maintaining an audit trail of system activity logs can help identify configuration errors, troubleshoot service disruptions, and analyze compromises that have occurred, as well as detect attacks. Audit logs are necessary to provide a trail of evidence in case the system or network is compromised. Collecting this data is essential for analyzing the security of information assets and detecting signs of suspicious and unexpected behavior.Enabling 'Include command line data for process creation events' will record the command line information with the process creation events in the log. This can provide additional detail when malware has run on a system.
 
 ### Remediation Approach
-Scripts were developed to block ICMP timestamp traffic for both IPv4 and IPv6.
+- ChatGPT was prompted to develop a STIG implementation script to be used on this VM that is scaleable to enterprise environment.
+- Script was manually reviewed and run on VM to test effectiveness
 
-### Testing Results
-- Firewall rules were applied successfully.
-- Tenable scans continued to report the vulnerability.
+### Testing and Iteration
+- Implementation script run resulting in message that STIG had been implemented effectively and that VM should pass audit for this STIG
+- Subsequent Tenable STIG audit scan run to verify implementation
 
-### Risk Analysis
-- This vulnerability is common in cloud environments.
-- It does not provide authentication bypass or system access.
-- Microsoft and Tenable acknowledge platform-level constraints for this finding.
+### Outcome
+- Command line data is enabled for process creation events
 
 ### Final Status
-**Risk Accepted – Documented Exception Recommended**
+**STIG implemented successfully**
+
+---
+
+## 3.6 – Next STIG
+**WN11-CC-ID**
+
+### Summary
+Disabling camera access from the Windows lock screen to prevent use of imaging hardware before user authentication. Allowing camera functionality at the lock screen could enable unauthorized image or video capture without valid credentials, increasing the system’s pre-authentication attack surface. Enforcing this setting ensures hardware resources are only available after sign-in and supports least-privilege and enterprise security compliance requirements.
+
+### Remediation Approach
+- ChatGPT was prompted to develop a STIG implementation script to be used on this VM that is scaleable to enterprise environment.
+- Script was manually reviewed and run on VM to test effectiveness
+
+### Testing and Iteration
+- Implementation script run resulting in message that STIG had been implemented effectively and that VM should pass audit for this STIG
+- Subsequent Tenable STIG audit scan run to verify implementation
+
+### Outcome
+- Camera access while VM in lock-screen state effectively disabled
+
+### Final Status
+**STIG implemented successfully**
 
 ---
 
